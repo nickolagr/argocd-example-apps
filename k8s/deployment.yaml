@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mongo-app
+  template:
+    metadata:
+      labels:
+        app: mongo-app
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:5.0.22
+          ports:
+            - containerPort: 27107
+      nodeSelector:
+        kubernetes.io/os: linux
+        kubernetes.io/arch: arm64
